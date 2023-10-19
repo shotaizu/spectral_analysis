@@ -12,9 +12,21 @@ This code has successfully worked with the following software:
 
 Using other versions, especially older ones, might work but this is not guaranteed. The code is definitely not compatible with Python 2.
 
+#### Python venv
+
+```
+python -m venv <env_name>
+source <env_name>/bin/activate[.csh]
+pip install pybind11 numpy scipy matplotlib
+```
+
 ### Installation
 You need to compile the snrate module (C++ code interfaced using Pybind11). In the Makefile, change the INC path to your Python path. Then compile using
-    make
+```
+make
+cd spectrum_generator/
+make
+```
 
 The code is now ready to use. snrate can be used like a regular Python module.
 

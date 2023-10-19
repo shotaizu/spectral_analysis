@@ -1,9 +1,12 @@
-INC=-I/usr/include/python3.6/ 
-#-I/home/elhedri/.local/include/python2.7/
-#INC=`python -m pybind11 --includes` -I/disk02/usr6/elhedri/miniconda3/envs/py3/include/python3.8 -I/disk02/usr6/elhedri/miniconda3/envs/py3/include
+INC=$(shell pybind11-config --includes)
+SUF=$(shell python3.8-config --extension-suffix)
+TGT=likes$(SUF)
 
-all: likes.cc
-	g++ -O3 -Wall -shared -std=c++11 -fPIC $(INC) `/home/giampaol/miniconda3/envs/spectral/bin/python -m pybind11 --includes` likes.cc -o likes`/home/giampaol/miniconda3/envs/spectral/bin/python3-config --extension-suffix`
+all: $(TGT)
+
+
+$(TGT): likes.cc
+	g++ -O3 -Wall -shared -std=c++11 -fPIC $(INC) likes.cc -o $@
 
 clean:
-	rm -f snrate`/home/giampaol/miniconda3/envs/spectral/bin/python3-config --extension-suffix`
+	rm -f $(TGT)
